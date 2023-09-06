@@ -9,6 +9,11 @@ type Product struct {
 	DB *gorm.DB
 }
 
+// FindById implements ProductInterface.
+func (*Product) FindById(id string) (*entity.Product, error) {
+	panic("unimplemented")
+}
+
 func NewProduct(db *gorm.DB) *Product {
 	return &Product{
 		DB: db,
