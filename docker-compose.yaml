@@ -6,8 +6,6 @@ services:
     build: .
     ports:
       - 8080:8080
-    volumes:
-      - .:/app
-    command: sh -c "cd app && ./server"
+    command: sh -c "cd app/cmd/server && go run main.go "
     
       

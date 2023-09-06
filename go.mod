@@ -19,6 +19,7 @@ require (
 
 require (
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
+	github.com/go-chi/chi/v5 v5.0.10
 	github.com/goccy/go-json v0.3.5 // indirect
 	github.com/google/uuid v1.3.1
 	github.com/hashicorp/hcl v1.0.0 // indirect

@@ -4,6 +4,8 @@ import (
 	"net/http"
 
 	//"github.com/luiszkm/api/configs"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	"github.com/luiszkm/api/internal/Domain/entity"
 	"github.com/luiszkm/api/internal/infra/database"
 	"github.com/luiszkm/api/internal/infra/http/handlers"
@@ -24,7 +26,12 @@ func main() {
 	productDB := database.NewProduct(db)
 	productHandler := handlers.NewProductHandler(productDB)
 
-	http.HandleFunc("/products", productHandler.CreateProduct )
-	http.ListenAndServe(":8080", nil)
+	router := chi.NewRouter()
+	router.Use(middleware.Logger)
+	router.Post("/products", productHandler.CreateProduct)
+	router.Get("/products/{id}", productHandler.GetProduct)
+	router.Get("/products", productHandler.GetAllProducts)
+	router.Put("/products/{id}", productHandler.UpdateProduct)
+	router.Delete("/products/{id}", productHandler.DeleteProduct)
+	http.ListenAndServe(":8080", router)
 }
-
