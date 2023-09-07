@@ -6,6 +6,12 @@ Content-Type: application/json
     "price": 100
 }
 ####
+GET http://localhost:8080/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTQwMDk0NzMsInN1YiI6Ijk4NjRkNDc0LWM4MjUtNDRkMy05ODM0LWVkOGZhYzY1NDczZSJ9.lKvx-xWqWB_7-UUhkvKpGNexkJkQJfYe80M7m1cblDA
+
+
+
+####
 POST http://localhost:8080/users
 Content-Type: application/json
 
