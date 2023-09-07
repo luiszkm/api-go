@@ -12,7 +12,7 @@ import (
 	"github.com/luiszkm/api/internal/Domain/entity"
 	"github.com/luiszkm/api/internal/infra/database"
 	"github.com/luiszkm/api/internal/infra/http/handlers"
-	"gorm.io/driver/sqlite"
+	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	httpSwagger "github.com/swaggo/http-swagger"
 	_ "github.com/luiszkm/api/docs"
@@ -42,8 +42,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
-	db, err := gorm.Open((sqlite.Open("test.db")), &gorm.Config{})
+	dsn := configs.DBUser + ":" + configs.DBPassword + "@tcp(" + configs.DBHost + ":" + configs.DBPort + ")/" + configs.DBName + "?charset=utf8mb4&parseTime=True&loc=Local"
+	db, err := gorm.Open((mysql.Open(dsn)), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}

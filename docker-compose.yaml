@@ -3,9 +3,29 @@ version: '3.1'
 services:
   app:
     container_name: go-api
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
     ports:
       - 8080:8080
-    command: sh -c "cd app/cmd/server && go run main.go "
+    depends_on:
+      mysql:
+        condition: service_healthy
+    command: sh -c "go run cmd/server/main.go"
     
-      
+  mysql: 
+    image: mysql:8
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: api-go
+    ports:
+      - 3306:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-ppass"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
